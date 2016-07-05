@@ -1,59 +1,32 @@
-set nocompatible
-source $VIMRUNTIME/vimrc_example.vim
-source $VIMRUNTIME/mswin.vim
-behave mswin
 
-set guioptions-=T           " hide menu bar
-set guioptions-=m           " hide toolbar
-map <silent> <F12> :if &guioptions =~# 'T' <Bar>
-        \set guioptions-=T <Bar>
-        \set guioptions-=m <bar>
-    \else <Bar>
-        \set guioptions+=T <Bar>
-        \set guioptions+=m <Bar>
-    \endif<CR>
+" ********** start setup for Vundle ************
+set nocompatible	" Use Vim defaults (much better!)
+filetype off        " required
 
-set diffexpr=MyDiff()
-function MyDiff()
-  let opt = '-a --binary '
-  if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
-  if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
-  let arg1 = v:fname_in
-  if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
-  let arg2 = v:fname_new
-  if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
-  let arg3 = v:fname_out
-  if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
-  let eq = ''
-  if $VIMRUNTIME =~ ' '
-    if &sh =~ '\<cmd'
-      let cmd = '""' . $VIMRUNTIME . '\diff"'
-      let eq = '"'
-    else
-      let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
-    endif
-  else
-    let cmd = $VIMRUNTIME . '\diff'
-  endif
-  silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3 . eq
-endfunction
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
-filetype off
+Plugin 'VundleVim/Vundle.vim'
 
-set rtp+=~/vimfiles/bundle/Vundle.vim/
-let path='~/vimfiles/bundle'
-call vundle#begin(path)
-
-Plugin 'gmarik/Vundle.vim'
+" Plugin 'tpope/vim-fugitive'
+" Plugin 'L9'
+" Plugin 'git://git.wincent.com/command-t.git'
+" Plugin 'file:///home/gmarik/path/to/plugin'
+" Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+" Plugin 'ascenator/L9', {'name': 'newL9'}
 
 "Plugin 'Colo-u-r-Sampler-Pack'
 Plugin 'molokai'
 Plugin 'Zenburn'
+"Plugin 'DrawIt'
 
 Plugin 'MiniBufExpl.vim'
 Plugin 'The-NERD-tree'
 Plugin 'The-NERD-Commenter'
 Plugin 'FuzzyFinder'
+
+"Plugin 'Conque-Shell'
+Plugin 'dbext.vim'
 
 Plugin 'Markdown'
 Plugin 'vimwiki'
@@ -81,71 +54,92 @@ Plugin 'beyondwords/vim-twig'
 Plugin 'phpvim'
 Plugin 'JavaScript-syntax'
 Plugin 'python.vim'
-Plugin 'dbext.vim'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
 
 " Brief help
-" :PluginList          - list configured bundles
-" :PluginInstall(!)    - install(update) bundles
-" :PluginSearch(!) foo - search(or refresh cache first) for foo
-" :PluginClean(!)      - confirm(or auto-approve) removal of unused bundles
-" see :h vundle for more details or wiki for FAQ
-" NOTE: comments after Plugin command are not allowed.
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+" ********** end setup for Vundle *****************
+
+colorscheme slate
+highlight Pmenu  ctermbg=lightgrey ctermfg=black
+highlight PmenuSel  ctermbg=green ctermfg=black
+
+if v:lang =~ "utf8$" || v:lang =~ "UTF-8$"
+   set fileencodings=ucs-bom,utf-8,latin1
+endif
+
+set bs=indent,eol,start		" allow backspacing over everything in insert mode
+"set ai			" always set autoindenting on
+"set backup		" keep a backup file
+set viminfo='20,\"50	" read/write a .viminfo file, don't store more
+			" than 50 lines of registers
+set history=50		" keep 50 lines of command line history
+set ruler		" show the cursor position all the time
+set tabstop=4
+set shiftwidth=4
+set expandtab
+set showmatch
+set number
+"set clipboard=unnamedplus
+
+" Only do this part when compiled with support for autocommands
+if has("autocmd")
+  augroup redhat
+  autocmd!
+  " In text files, always limit the width of text to 78 characters
+  " autocmd BufRead *.txt set tw=78
+  " When editing a file, always jump to the last cursor position
+  autocmd BufReadPost *
+  \ if line("'\"") > 0 && line ("'\"") <= line("$") |
+  \   exe "normal! g'\"" |
+  \ endif
+  " don't write swapfile on most commonly used directories for NFS mounts or USB sticks
+  autocmd BufNewFile,BufReadPre /media/*,/run/media/*,/mnt/* set directory=~/tmp,/var/tmp,/tmp
+  " start with spec file template
+  autocmd BufNewFile *.spec 0r /usr/share/vim/vimfiles/template.spec
+  augroup END
+endif
+
+if has("cscope") && filereadable("/usr/bin/cscope")
+   set csprg=/usr/bin/cscope
+   set csto=0
+   set cst
+   set nocsverb
+   " add any database in current directory
+   if filereadable("cscope.out")
+      cs add $PWD/cscope.out
+   " else add database pointed to by environment
+   elseif $CSCOPE_DB != ""
+      cs add $CSCOPE_DB
+   endif
+   set csverb
+endif
+
+" Switch syntax highlighting on, when the terminal has colors
+" Also switch on highlighting the last used search pattern.
+if &t_Co > 2 || has("gui_running")
+"  syntax on
+  set hlsearch
+endif
 
 filetype plugin on
 
-" colorscheme darkblue
-" set guifont=Fixedsys:h12:cANSI
-" set guifont=Courier_New:h14:cANSI  
-
-set lines=32 columns=160
-
-set encoding=utf-8
-set fileencodings=utf-8,chinese,latin-1
-
-if has("win32")
-  set fileencoding=chinese
-else
-  set fileencoding=utf-8
+if &term=="xterm"
+     set t_Co=8
+     set t_Sb=[4%dm
+     set t_Sf=[3%dm
 endif
 
-
-"解决菜单乱码
-source $VIMRUNTIME/delmenu.vim
-source $VIMRUNTIME/menu.vim
-
-"解决console输出乱码
-language messages zh_CN.utf-8
-
-set backspace=indent,eol,start
-
-set nobackup
-set ignorecase
-set history=50		" keep 50 lines of command line history
-set ruler			" show the cursor position all the time
-set showcmd			" display incomplete commands
-set incsearch		" do incremental searching
-set tabstop=4
-set shiftwidth=4
-set expandtab       "tranfer tab to 4 spaces
-set autoindent
-set smartindent
-set showmatch
-
-set nu
-
-map Q gq
-vmap <C-X> "+x
-vmap <C-C> "+y
-nmap <C-V> "+gP
-
-inoremap <C-U> <C-G>u<C-U>
-
-if has('mouse')
-  set mouse=a
-endif
+" Don't wake up system with blinking cursor:
+" http://www.linuxpowertop.org/known.php
+let &guicursor = &guicursor . ",a:blinkon0"
 
 
 let g:miniBufExplMapWindowNavVim = 1 
@@ -153,15 +147,13 @@ let g:miniBufExplMapWindowNavArrows = 1
 let g:miniBufExplMapCTabSwitchBufs = 1 
 let g:miniBufExplModSelTarget = 1 
 
-let g:NERDTreeWinSize = 20
+let g:NERDTreeWinSize = 24
+" let g:NERDTreeShowBookmarks=1
 
 let Tlist_WinWidth=20
 let Tlist_Show_One_File=1
 let Tlist_Exit_OnlyWindow=1
 let Tlist_Use_Right_Window = 1
-
-"let g:winManagerWindowLayout='FileExplorer'
-"nmap wm :WMToggle<cr>
 
 nnoremap <leader>ff :FufFile<CR> 
 nnoremap <leader>fb :FufBuffer<CR> 
@@ -173,21 +165,16 @@ nmap <silent><F8> :TlistToggle<CR>
 "let g:SuperTabRetainCompletionType=2
 "let g:SuperTabDefaultCompletionType="<C-X><C-O>"
 
-let g:snippets_dir = '~/vimfiles/bundle/snipMate/snippets/'
+"let g:snippets_dir = '~/vimfiles/bundle/snipMate/snippets/'
 
 let g:user_emmet_mode='a'
 let g:user_emmet_install_global=0
 autocmd FileType html,css,xml,php,twig EmmetInstall
 
 "set connections for dbext
-let g:dbext_default_profile_mysql_vxframe = 'type=MYSQL:user=root:passwd=root:dbname=vxframe:extra=-t'
-let g:dbext_default_profile_mysql_wcn = 'type=MYSQL:user=root:passwd=hkcd1862:dbname=wcn_transition:extra=-t:host=203.85.54.57'
-let g:dbext_default_profile_mysql_hkcd = 'type=MYSQL:user=root:passwd=hkcd1862:dbname=wcn_transition:extra=-t:host=152.101.169.49'
-let g:dbext_default_profile_sqlite = 'type=SQLITE:SQLITE_bin=C:\Programs\POPFile\sqlite.exe:dbname=C:\Programs\POPFile\popfile.db'
+"let g:dbext_default_profile_mysql_survey = 'type=MYSQL:user=root:passwd=root:dbname=survey:extra=-t'
 
-let g:dbext_default_profile_mysql_cmssite = 'type=MYSQL:user=root:passwd=hkcd1862:dbname=wcn_cmssite:extra=-t:host=203.85.54.57'
-let g:dbext_default_profile_mysql_global = 'type=MYSQL:user=root:passwd=hkcd1862:dbname=global:extra=-t:host=203.85.54.57'
+nmap <leader>cd :r!curl -s http://112.74.69.112/xwtools/get.php<CR>
 
-source c:/program files/vim/my-plugin/Dict.vim
-source c:/program files/vim/my-plugin/phphelp.vim
-source c:/program files/vim/my-plugin/qiushibaike.vim
+source ~/.vim/myplugin/dict.vim
+source ~/.vim/myplugin/phphelp.vim
