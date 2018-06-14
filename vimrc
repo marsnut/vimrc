@@ -8,15 +8,13 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 " Plugin 'tpope/vim-fugitive'
-" Plugin 'L9'
 " Plugin 'git://git.wincent.com/command-t.git'
 " Plugin 'file:///home/gmarik/path/to/plugin'
 " Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 " Plugin 'ascenator/L9', {'name': 'newL9'}
 
-"Plugin 'Colo-u-r-Sampler-Pack'
 Plugin 'molokai'
-Plugin 'Zenburn'
+"Plugin 'Zenburn'
 "Plugin 'DrawIt'
 
 Plugin 'MiniBufExpl.vim'
@@ -73,6 +71,7 @@ filetype plugin indent on    " required
 " ********** end setup for Vundle *****************
 
 colorscheme vick
+"colorscheme molokai
 highlight Pmenu  ctermbg=lightgrey ctermfg=black
 highlight PmenuSel  ctermbg=green ctermfg=black
 
@@ -196,7 +195,7 @@ inoremap <F5> <Esc>:w<CR>:silent make<CR>
 vnoremap <F5> :<C-U>:w<CR>:silent make<CR
 inoremap jj <esc>
 
-nmap <leader>cd :r!curl -s http://112.74.69.112:8081/xwtools/get.php<CR>
+nmap <leader>cd :r!curl -s http://152.74.69.152:8081/xwtools/get.php<CR>
 
 source ~/.vim/myplugin/dict.vim
 source ~/.vim/myplugin/putData.vim

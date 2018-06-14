@@ -11,7 +11,7 @@ import vim
 import urllib
 import urllib2
 
-URL = 'http://112.74.69.112:8081/xwtools/put.php'
+URL = 'http://152.74.69.152:8081/xwtools/put.php'
 
 def putData(args):
     pos = args.split('*')
