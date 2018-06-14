@@ -54,6 +54,7 @@ Plugin 'beyondwords/vim-twig'
 Plugin 'phpvim'
 Plugin 'JavaScript-syntax'
 Plugin 'python.vim'
+Plugin 'fugitive.vim'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
