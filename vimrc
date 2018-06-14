@@ -1,4 +1,3 @@
-
 " ********** start setup for Vundle ************
 set nocompatible	" Use Vim defaults (much better!)
 filetype off        " required
@@ -54,7 +53,12 @@ Plugin 'beyondwords/vim-twig'
 Plugin 'phpvim'
 Plugin 'JavaScript-syntax'
 Plugin 'python.vim'
+Plugin 'itchyny/calendar.vim'
+Plugin 'aklt/plantuml-syntax'
+Plugin 'AD7six/vim-activity-log'
+"Plugin 'mhinz/vim-signify'
 Plugin 'fugitive.vim'
+
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -68,7 +72,7 @@ filetype plugin indent on    " required
 " :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
 " ********** end setup for Vundle *****************
 
-colorscheme slate
+colorscheme vick
 highlight Pmenu  ctermbg=lightgrey ctermfg=black
 highlight PmenuSel  ctermbg=green ctermfg=black
 
@@ -133,7 +137,7 @@ endif
 filetype plugin on
 
 if &term=="xterm"
-     set t_Co=8
+     set t_Co=256
      set t_Sb=[4%dm
      set t_Sf=[3%dm
 endif
@@ -158,9 +162,9 @@ let Tlist_Use_Right_Window = 1
 
 nnoremap <leader>ff :FufFile<CR> 
 nnoremap <leader>fb :FufBuffer<CR> 
-nmap <silent><F4> :NERDTreeToggle<CR>
+nmap <silent><leader>dm :NERDTreeToggle<CR>
 nmap <silent><F8> :TlistToggle<CR>
-
+inoremap jj <esc>
 
 "代码补全，用TAB键激活
 "let g:SuperTabRetainCompletionType=2
@@ -172,10 +176,28 @@ let g:user_emmet_mode='a'
 let g:user_emmet_install_global=0
 autocmd FileType html,css,xml,php,twig EmmetInstall
 
-"set connections for dbext
-"let g:dbext_default_profile_mysql_survey = 'type=MYSQL:user=root:passwd=root:dbname=survey:extra=-t'
+"let g:vimwiki_use_mouse=1
+let g:vimwiki_list = [{'path': '~/vimwiki/',
+\ 'path_html': '/home/wwwroot/wiki',
+\ 'template_path': '~/vimwiki/template',
+\ 'template_default': 'default.tpl'},
+\{'path':'/root/wiki',
+\ 'path_html': '/home/wwwroot/wiki1'}]
 
-nmap <leader>cd :r!curl -s http://112.74.69.112/xwtools/get.php<CR>
+let g:vimwiki_use_calendar=1
+
+"set connections for dbext
+"let g:dbext_default_profile_mysql_cms = 'type=MYSQL:user=root:passwd=art2jh2017V:dbname=cms:extra=-t'
+
+let g:plantuml_executable_script='java -jar ~/data/plantuml.jar -o /home/wwwroot/wiki/uml/dstimg/oc'
+
+nnoremap <F5> :w<CR> :make<CR>
+inoremap <F5> <Esc>:w<CR>:silent make<CR>
+vnoremap <F5> :<C-U>:w<CR>:silent make<CR
+inoremap jj <esc>
+
+nmap <leader>cd :r!curl -s http://112.74.69.112:8081/xwtools/get.php<CR>
 
 source ~/.vim/myplugin/dict.vim
+source ~/.vim/myplugin/putData.vim
 source ~/.vim/myplugin/phphelp.vim
