@@ -70,8 +70,8 @@ filetype plugin indent on    " required
 " :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
 " ********** end setup for Vundle *****************
 
-colorscheme vick
-"colorscheme molokai
+"colorscheme vick
+colorscheme molokai
 highlight Pmenu  ctermbg=lightgrey ctermfg=black
 highlight PmenuSel  ctermbg=green ctermfg=black
 
