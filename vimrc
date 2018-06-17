@@ -70,8 +70,8 @@ filetype plugin indent on    " required
 " :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
 " ********** end setup for Vundle *****************
 
-"colorscheme vick
-colorscheme molokai
+colorscheme vick
+"colorscheme molokai
 highlight Pmenu  ctermbg=lightgrey ctermfg=black
 highlight PmenuSel  ctermbg=green ctermfg=black
 
@@ -195,7 +195,7 @@ inoremap <F5> <Esc>:w<CR>:silent make<CR>
 vnoremap <F5> :<C-U>:w<CR>:silent make<CR
 inoremap jj <esc>
 
-nmap <leader>cd :r!curl -s http://152.74.69.152:8081/xwtools/get.php<CR>
+nmap <leader>cd :r!curl -s http://152.74.69.152:8082/xwtools/get.php<CR>
 
 source ~/.vim/myplugin/dict.vim
 source ~/.vim/myplugin/putData.vim
