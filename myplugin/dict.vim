@@ -12,7 +12,7 @@ import urllib
 import urllib2
 from urllib2 import URLError
 
-DICT_URL = "http://152.74.69.152:8081/xwtools/dict.php?word=%s" 
+DICT_URL = "http://152.74.69.152:8082/xwtools/dict.php?word=%s" 
 def vxDict(word):
     url = DICT_URL % (word)
     try:
