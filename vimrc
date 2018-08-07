@@ -20,6 +20,7 @@ Plugin 'molokai'
 Plugin 'MiniBufExpl.vim'
 Plugin 'The-NERD-tree'
 Plugin 'The-NERD-Commenter'
+"Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'FuzzyFinder'
 
 "Plugin 'Conque-Shell'
@@ -91,6 +92,7 @@ set shiftwidth=4
 set expandtab
 set showmatch
 set number
+set ignorecase
 "set clipboard=unnamedplus
 
 " Only do this part when compiled with support for autocommands
@@ -152,7 +154,20 @@ let g:miniBufExplMapCTabSwitchBufs = 1
 let g:miniBufExplModSelTarget = 1 
 
 let g:NERDTreeWinSize = 24
-" let g:NERDTreeShowBookmarks=1
+let g:NERDTreeIgnore = ['\.pyc$', '\.swp$']
+"let g:NERDTreeShowBookmarks=1
+"let g:NERDTreeIndicatorMapCustom = {
+"    \ "Modified"  : "*",
+"    \ "Staged"    : "+",
+"    \ "Untracked" : "#",
+"    \ "Renamed"   : "r",
+"    \ "Unmerged"  : "=",
+"    \ "Deleted"   : "x",
+"    \ "Dirty"     : "@",
+"    \ "Clean"     : "c",
+"    \ 'Ignored'   : 'i',
+"    \ "Unknown"   : "u"
+"    \ }
 
 let Tlist_WinWidth=20
 let Tlist_Show_One_File=1
