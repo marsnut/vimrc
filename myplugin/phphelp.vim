@@ -116,3 +116,5 @@ EOF
 endfunction
 
 command! -nargs=1 Php :call s:vxPhpHelp(<f-args>)
+
+
