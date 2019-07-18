@@ -47,8 +47,7 @@ call vundle#begin(path)
 Plugin 'gmarik/Vundle.vim'
 
 Plugin 'vim-scripts/EditPlus'
-Plugin 'molokai'
-Plugin 'Zenburn'
+Plugin 'marsnut/nightpearl'
 
 Plugin 'MiniBufExpl.vim'
 Plugin 'The-NERD-tree'
@@ -86,7 +85,6 @@ Plugin 'python.vim'
 Plugin 'dbext.vim'
 Plugin 'fugitive.vim'
 Plugin 'posva/vim-vue'
-Plugin 'marsnut/nightpearl'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -102,12 +100,11 @@ filetype plugin indent on    " required
 filetype plugin on
 
 " colorscheme EditPlus
-colorscheme oasis
+" colorscheme oasis
 " colorscheme darkblue
 " colorscheme vick
 " colorscheme shrine
-" colorscheme nightpearl
-" colorscheme Zenburn
+colorscheme nightpearl
 
 set background=light
 
@@ -250,7 +247,7 @@ let g:dbext_default_profile_mysql_global = 'type=MYSQL:user=root:passwd=hkcd1862
 
 nmap <leader>cd :r!curl -s http://47.112.110.227:8082/xwtools/get.php<CR>
 
-source c:/program files/vim/my-plugin/dict.vim
-source c:/program files/vim/my-plugin/phphelp.vim
-source c:/program files/vim/my-plugin/putData.vim
-source c:/program files/vim/my-plugin/qiushibaike.vim
+source $VIM/my-plugin/dict.vim
+source $VIM/my-plugin/phphelp.vim
+source $VIM/my-plugin/putData.vim
+source $VIM/my-plugin/qiushibaike.vim
