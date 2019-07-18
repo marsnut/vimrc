@@ -46,6 +46,7 @@ call vundle#begin(path)
 
 Plugin 'gmarik/Vundle.vim'
 
+Plugin 'vim-scripts/EditPlus'
 Plugin 'molokai'
 Plugin 'Zenburn'
 
@@ -85,6 +86,7 @@ Plugin 'python.vim'
 Plugin 'dbext.vim'
 Plugin 'fugitive.vim'
 Plugin 'posva/vim-vue'
+Plugin 'marsnut/nightpearl'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -99,10 +101,15 @@ filetype plugin indent on    " required
 
 filetype plugin on
 
+" colorscheme EditPlus
+colorscheme oasis
 " colorscheme darkblue
 " colorscheme vick
 " colorscheme shrine
-colorscheme nightpearl
+" colorscheme nightpearl
+" colorscheme Zenburn
+
+set background=light
 
 set guifont=Fixedsys:h12:cANSI
 " set guifont=Courier_New:h14:cANSI  
