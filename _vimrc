@@ -46,7 +46,6 @@ call vundle#begin(path)
 
 Plugin 'gmarik/Vundle.vim'
 
-"Plugin 'Colo-u-r-Sampler-Pack'
 Plugin 'molokai'
 Plugin 'Zenburn'
 
@@ -60,7 +59,7 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'Markdown'
 Plugin 'vimwiki'
 "Plugin 'Vimpress'
-"Plugin 'DoxygenToolkit.vim'
+Plugin 'DoxygenToolkit.vim'
 
 Plugin 'taglist.vim'
 "Plugin 'c.vim'
@@ -75,7 +74,7 @@ Plugin 'SuperTab'
 Plugin 'snipMate'
 
 Plugin 'joonty/vim-sauce'
-"Plugin 'joonty/vim-phpqa'
+Plugin 'joonty/vim-phpqa'
 "Plugin 'joonty/vim-taggatron'
 "Plugin 'EasyMotion'
 Plugin 'beyondwords/vim-twig'
