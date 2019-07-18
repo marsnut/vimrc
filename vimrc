@@ -44,7 +44,7 @@ Plugin 'SuperTab'
 Plugin 'snipMate'
 
 Plugin 'joonty/vim-sauce'
-"Plugin 'joonty/vim-phpqa'
+Plugin 'joonty/vim-phpqa'
 "Plugin 'joonty/vim-taggatron'
 "Plugin 'EasyMotion'
 Plugin 'beyondwords/vim-twig'
