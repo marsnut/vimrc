@@ -247,7 +247,7 @@ let g:dbext_default_profile_mysql_global = 'type=MYSQL:user=root:passwd=hkcd1862
 
 nmap <leader>cd :r!curl -s http://47.112.110.227:8082/xwtools/get.php<CR>
 
-source $VIM/my-plugin/dict.vim
-source $VIM/my-plugin/phphelp.vim
-source $VIM/my-plugin/putData.vim
-source $VIM/my-plugin/qiushibaike.vim
+source $VIM/myplugin/dict.vim
+source $VIM/myplugin/phphelp.vim
+source $VIM/myplugin/putData.vim
+source $VIM/myplugin/qiushibaike.vim
