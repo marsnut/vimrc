@@ -102,6 +102,7 @@ filetype plugin on
 
 " colorscheme darkblue
 " colorscheme vick
+" colorscheme shrine
 colorscheme nightpearl
 
 set guifont=Fixedsys:h12:cANSI
@@ -117,7 +118,6 @@ if has("win32")
 else
   set fileencoding=utf-8
 endif
-
 
 "解决菜单乱码
 source $VIMRUNTIME/delmenu.vim
@@ -155,6 +155,7 @@ if has('mouse')
   set mouse=a
 endif
 
+" MiniBufExpl
 let g:miniBufExplMapWindowNavVim = 1 
 let g:miniBufExplMapWindowNavArrows = 1 
 let g:miniBufExplMapCTabSwitchBufs = 1 
@@ -162,8 +163,10 @@ let g:miniBufExplModSelTarget = 1
 "let g:miniBufExplForceSyntaxEnable = 1  
 "let g:miniBufExplorerMoreThanOne = 2
 
+" The-NERD-tree
 let g:NERDTreeWinSize = 20
 
+" TagList
 let Tlist_WinWidth=20
 let Tlist_Show_One_File=1
 let Tlist_Exit_OnlyWindow=1
@@ -200,6 +203,7 @@ let g:SuperTabDefaultCompletionType="<C-X><C-O>"
 
 " let g:snippets_dir = '~/vimfiles/bundle/snipMate/snippets/'
 
+" emmet
 let g:user_emmet_mode='a'
 let g:user_emmet_install_global=0
 autocmd FileType html,css,xml,php,twig EmmetInstall
@@ -219,16 +223,15 @@ au BufNewFile,BufRead *.html,*.js,*.vue set expandtab
 au BufNewFile,BufRead *.html,*.js,*.vue set autoindent
 au BufNewFile,BufRead *.html,*.js,*.vue set fileformat=unix
 
-"set statusline+=%#warningmsg#
-"set statusline+=%{SyntasticStatuslineFlag()}
-"set statusline+=%*
-
+" syntastic
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
-
 let g:syntastic_javascript_checkers = ['eslint']
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
 
 "set connections for dbext
 let g:dbext_default_profile_mysql_vxframe = 'type=MYSQL:user=root:passwd=root:dbname=vxframe:extra=-t'
