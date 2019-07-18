@@ -14,9 +14,8 @@ Plugin 'VundleVim/Vundle.vim'
 " Plugin 'ascenator/L9', {'name': 'newL9'}
 " Plugin 'file:///root/software/command-t-master/'
 
-" Plugin 'molokai'
-" Plugin 'Zenburn'
-" Plugin 'DrawIt'
+Plugin 'marsnut/nightpearl'
+Plugin 'marsnut/vim-utils'
 
 Plugin 'MiniBufExpl.vim'
 Plugin 'The-NERD-tree'
@@ -72,11 +71,11 @@ filetype plugin indent on    " required
 " ********** end setup for Vundle *****************
 
 " colorscheme desert
-" colorscheme darkblue
+colorscheme darkblue
 " colorscheme molokai
 " colorscheme vick
 " colorscheme lost-shrine
-colorscheme nightpearl
+" colorscheme nightpearl
 " set background=dark
 
 highlight Pmenu  ctermbg=lightgrey ctermfg=black
@@ -286,4 +285,3 @@ nmap <leader>cd :r!curl -s http://47.112.110.227:8082/xwtools/get.php<CR>
 
 source ~/.vim/myplugin/dict.vim
 source ~/.vim/myplugin/putData.vim
-source ~/.vim/myplugin/phphelp.vim
