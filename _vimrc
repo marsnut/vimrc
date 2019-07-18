@@ -70,7 +70,7 @@ Plugin 'Visual-Mark'
 Plugin 'L9'
 Plugin 'Syntastic'
 Plugin 'OmniCppComplete'
-"Plugin 'AutoComplPop'
+Plugin 'AutoComplPop'
 Plugin 'SuperTab'
 Plugin 'snipMate'
 
