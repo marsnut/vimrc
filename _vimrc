@@ -237,15 +237,9 @@ let g:syntastic_javascript_checkers = ['eslint']
 "set statusline+=%*
 
 "set connections for dbext
-let g:dbext_default_profile_mysql_vxframe = 'type=MYSQL:user=root:passwd=root:dbname=vxframe:extra=-t'
-let g:dbext_default_profile_mysql_wcn = 'type=MYSQL:user=root:passwd=hkcd1862:dbname=wcn_transition:extra=-t:host=203.85.54.57'
-let g:dbext_default_profile_mysql_hkcd = 'type=MYSQL:user=root:passwd=hkcd1862:dbname=wcn_transition:extra=-t:host=152.101.169.49'
-let g:dbext_default_profile_sqlite = 'type=SQLITE:SQLITE_bin=C:\Programs\POPFile\sqlite.exe:dbname=C:\Programs\POPFile\popfile.db'
+let g:dbext_default_profile_mysql_cms= 'type=MYSQL:user=root:passwd=123:dbname=wcn_cmssite:extra=-t:host=111.101.169.49'
 
-let g:dbext_default_profile_mysql_cmssite = 'type=MYSQL:user=root:passwd=hkcd1862:dbname=wcn_cmssite:extra=-t:host=152.101.169.49'
-let g:dbext_default_profile_mysql_global = 'type=MYSQL:user=root:passwd=hkcd1862:dbname=global:extra=-t:host=203.85.54.57'
-
-nmap <leader>cd :r!curl -s http://47.112.110.227:8082/xwtools/get.php<CR>
+nmap <leader>cd :r!curl -s http://47.111.111.227:8082/xwtools/get.php<CR>
 
 source $VIM/myplugin/dict.vim
 source $VIM/myplugin/phphelp.vim
