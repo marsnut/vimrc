@@ -8,7 +8,7 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 " Plugin 'tpope/vim-fugitive'
-"Plugin 'git://git.wincent.com/command-t.git'
+" Plugin 'git://git.wincent.com/command-t.git'
 " Plugin 'file:///home/gmarik/path/to/plugin'
 " Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 " Plugin 'ascenator/L9', {'name': 'newL9'}
@@ -262,7 +262,8 @@ let g:vimwiki_use_calendar=1
 "map <F8> :Calendar<cr>
 
 " dbext
-let g:dbext_default_profile_mysql_laracms = 'type=MYSQL:user=root:passwd=vicky2art190315V:dbname=laracms:extra=-t'
+let g:dbext_default_profile_mysql_laracms = 'type=MYSQL:user=root:passwd=123:dbname=laracms:extra=-t'
+
 let g:plantuml_executable_script='java -jar ~/bin/plantuml.jar -o /home/wwwroot/wiki/uml/dstimg/ctcm'
 
 " *** SHORTCUT ***
