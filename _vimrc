@@ -77,7 +77,7 @@ Plugin 'joonty/vim-sauce'
 Plugin 'joonty/vim-phpqa'
 "Plugin 'joonty/vim-taggatron'
 "Plugin 'EasyMotion'
-Plugin 'beyondwords/vim-twig'
+"Plugin 'beyondwords/vim-twig'
 
 Plugin 'phpvim'
 Plugin 'JavaScript-syntax'
@@ -209,7 +209,7 @@ let g:SuperTabDefaultCompletionType="<C-X><C-O>"
 " emmet
 let g:user_emmet_mode='a'
 let g:user_emmet_install_global=0
-autocmd FileType html,css,xml,php,twig EmmetInstall
+autocmd FileType html,css,xml,php,vue EmmetInstall
 
 autocmd FileType python set omnifunc=pythoncomplete#Complete
 autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
