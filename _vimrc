@@ -85,6 +85,7 @@ Plugin 'python.vim'
 Plugin 'dbext.vim'
 Plugin 'fugitive.vim'
 Plugin 'posva/vim-vue'
+Plugin 'chemzqm/wxapp.vim'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
