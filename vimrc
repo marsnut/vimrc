@@ -57,6 +57,7 @@ Plugin 'AD7six/vim-activity-log'
 "Plugin 'mhinz/vim-signify'
 Plugin 'fugitive.vim'
 Plugin 'posva/vim-vue'
+Plugin 'chemzqm/wxapp.vim'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
