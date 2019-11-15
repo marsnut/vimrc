@@ -209,7 +209,43 @@ let g:SuperTabDefaultCompletionType="<C-X><C-O>"
 " emmet
 let g:user_emmet_mode='a'
 let g:user_emmet_install_global=0
-autocmd FileType html,css,xml,php,vue EmmetInstall
+let g:user_emmet_settings = {
+\ 'wxss': {
+\   'extends': 'css',
+\ },
+\ 'wxml': {
+\   'extends': 'html',
+\   'aliases': {
+\     'div': 'view',
+\     'span': 'text',
+\   },
+\   'default_attributes': {
+\     'block': [{'wx:for-items': '{{list}}','wx:for-item': '{{item}}'}],
+\     'navigator': [{'url': '', 'redirect': 'false'}],
+\     'scroll-view': [{'bindscroll': ''}],
+\     'swiper': [{'autoplay': 'false', 'current': '0'}],
+\     'icon': [{'type': 'success', 'size': '23'}],
+\     'progress': [{'precent': '0'}],
+\     'button': [{'size': 'default'}],
+\     'checkbox-group': [{'bindchange': ''}],
+\     'checkbox': [{'value': '', 'checked': ''}],
+\     'picker': [{'bindchange': ''}],
+\     'radio-group': [{'bindchange': ''}],
+\     'radio': [{'checked': ''}],
+\     'switch': [{'checked': ''}],
+\     'slider': [{'value': ''}],
+\     'action-sheet': [{'bindchange': ''}],
+\     'modal': [{'title': ''}],
+\     'loading': [{'bindchange': ''}],
+\     'toast': [{'duration': '1500'}],
+\     'image': [{'src': '', 'mode': 'scaleToFill'}],
+\   },
+\ },
+\}
+"\     'label': [{'for': ''}],
+"\     'input': [{'type': 'text'}],
+"\     'form': [{'bindsubmit': ''}],
+autocmd FileType html,css,xml,php,vue,wxss,wxml EmmetInstall
 
 autocmd FileType python set omnifunc=pythoncomplete#Complete
 autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
@@ -219,12 +255,12 @@ autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
 autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 autocmd FileType c set omnifunc=ccomplete#Complete
 
-au BufNewFile,BufRead *.html,*.js,*.vue set tabstop=2
-au BufNewFile,BufRead *.html,*.js,*.vue set softtabstop=2
-au BufNewFile,BufRead *.html,*.js,*.vue set shiftwidth=2
-au BufNewFile,BufRead *.html,*.js,*.vue set expandtab
-au BufNewFile,BufRead *.html,*.js,*.vue set autoindent
-au BufNewFile,BufRead *.html,*.js,*.vue set fileformat=unix
+au BufNewFile,BufRead *.html,*.js,*.vue,*.wxml,*.wxss set tabstop=2
+au BufNewFile,BufRead *.html,*.js,*.vue,*.wxml,*.wxss set softtabstop=2
+au BufNewFile,BufRead *.html,*.js,*.vue,*.wxml,*.wxss set shiftwidth=2
+au BufNewFile,BufRead *.html,*.js,*.vue,*.wxml,*.wxss set expandtab
+au BufNewFile,BufRead *.html,*.js,*.vue,*.wxml,*.wxss set autoindent
+au BufNewFile,BufRead *.html,*.js,*.vue,*.wxml,*.wxss set fileformat=unix
 
 " syntastic
 let g:syntastic_always_populate_loc_list = 1
