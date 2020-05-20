@@ -46,35 +46,45 @@ call vundle#begin(path)
 
 Plugin 'gmarik/Vundle.vim'
 
-Plugin 'vim-scripts/EditPlus'
 Plugin 'marsnut/nightpearl'
+"Plugin 'marsnut/vim-utils'
 
-Plugin 'MiniBufExpl.vim'
+"Plugin 'vim-scripts/EditPlus'
+Plugin 'molokai'
+Plugin 'Zenburn'
+
+"Plugin 'MiniBufExpl.vim'
 Plugin 'The-NERD-tree'
 Plugin 'The-NERD-Commenter'
 "Plugin 'FuzzyFinder'
 "Plugin 'wincent/command-t'
-Plugin 'kien/ctrlp.vim'
+
+Plugin 'Yggdroot/LeaderF'
+"Plugin 'kien/ctrlp.vim'
+Plugin 'dbext.vim'
 
 Plugin 'Markdown'
 Plugin 'vimwiki'
 "Plugin 'Vimpress'
 Plugin 'DoxygenToolkit.vim'
 
-Plugin 'taglist.vim'
+"Plugin 'taglist.vim'
 "Plugin 'c.vim'
 Plugin 'Emmet.vim'
 Plugin 'Visual-Mark'
 
 Plugin 'L9'
-Plugin 'Syntastic'
-Plugin 'OmniCppComplete'
+Plugin 'dense-analysis/ale'
+" Plugin 'OmniCppComplete'
 Plugin 'AutoComplPop'
+Plugin 'ycm-core/YouCompleteMe'
 Plugin 'SuperTab'
-Plugin 'snipMate'
+"Plugin 'snipMate'
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
 
 Plugin 'joonty/vim-sauce'
-Plugin 'joonty/vim-phpqa'
+"Plugin 'joonty/vim-phpqa'
 "Plugin 'joonty/vim-taggatron'
 "Plugin 'EasyMotion'
 "Plugin 'beyondwords/vim-twig'
@@ -82,10 +92,15 @@ Plugin 'joonty/vim-phpqa'
 Plugin 'phpvim'
 Plugin 'JavaScript-syntax'
 Plugin 'python.vim'
-Plugin 'dbext.vim'
 Plugin 'fugitive.vim'
 Plugin 'posva/vim-vue'
+Plugin 'Rykka/colorv.vim'
 Plugin 'chemzqm/wxapp.vim'
+Plugin 'CoatiSoftware/vim-sourcetrail'
+"Plugin 'lervag/vimtex'
+
+Plugin 'skywind3000/asyncrun.vim'
+Plugin 'ludovicchabant/vim-gutentags'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -104,15 +119,15 @@ filetype plugin on
 " colorscheme oasis
 " colorscheme darkblue
 " colorscheme vick
-" colorscheme shrine
-colorscheme nightpearl
+colorscheme shrine
+" colorscheme nightpearl
 
-set background=light
+set background=dark
 
 set guifont=Fixedsys:h12:cANSI
 " set guifont=Courier_New:h14:cANSI  
 
-set lines=32 columns=160
+set lines=32 columns=150
 
 set encoding=utf-8
 set fileencodings=utf-8,gbk,gb18036,latin-1
@@ -123,11 +138,9 @@ else
   set fileencoding=utf-8
 endif
 
-"解决菜单乱码
 source $VIMRUNTIME/delmenu.vim
 source $VIMRUNTIME/menu.vim
 
-"解决console输出乱码
 language messages zh_CN.utf-8
 
 set backspace=indent,eol,start
@@ -147,6 +160,7 @@ set smartindent
 set showmatch
 
 set nu
+set nofoldenable
 
 map Q gq
 vmap <C-X> "+x
@@ -160,56 +174,112 @@ if has('mouse')
 endif
 
 " MiniBufExpl
-let g:miniBufExplMapWindowNavVim = 1 
-let g:miniBufExplMapWindowNavArrows = 1 
-let g:miniBufExplMapCTabSwitchBufs = 1 
-let g:miniBufExplModSelTarget = 1 
-"let g:miniBufExplForceSyntaxEnable = 1  
-"let g:miniBufExplorerMoreThanOne = 2
+"let g:miniBufExplMapWindowNavVim = 1 
+"let g:miniBufExplMapWindowNavArrows = 1 
+"let g:miniBufExplMapCTabSwitchBufs = 1 
+"let g:miniBufExplModSelTarget = 1 
+""let g:miniBufExplForceSyntaxEnable = 1  
+""let g:miniBufExplorerMoreThanOne = 2
+
+" TagList
+"let Tlist_WinWidth=20
+"let Tlist_Show_One_File=1
+"let Tlist_Exit_OnlyWindow=1
+"let Tlist_Use_Right_Window = 1
 
 " The-NERD-tree
 let g:NERDTreeWinSize = 20
+let g:NERDTreeIgnore = ['\.pyc$']
+" let g:NERDTreeShowBookmarks=1
+nmap <silent>tt :NERDTreeToggle<CR>
+"nmap <silent>tl :TlistToggle<CR>
+noremap <c-h> <c-w>h
+noremap <c-l> <c-w>l
+noremap <c-j> <c-w>j
+noremap <c-k> <c-w>k
 
-" TagList
-let Tlist_WinWidth=20
-let Tlist_Show_One_File=1
-let Tlist_Exit_OnlyWindow=1
-let Tlist_Use_Right_Window = 1
+" LeaderF
+let g:Lf_ShortcutF = '<leader>ff'
+let g:Lf_ShortcutB = '<leader>bb'
+noremap <leader>fu :LeaderfFunction!<cr>
+noremap <leader>fm :LeaderfMru<cr>
+noremap <leader>ft :LeaderfTag<cr>
+noremap <leader>fl :LeaderfLine<cr>
+
+let g:Lf_StlSeparator = { 'left': '', 'right': '', 'font': '' }
+let g:Lf_RootMarkers = ['.project', '.root', '.svn', '.git']
+let g:Lf_WorkingDirectoryMode = 'Ac'
+let g:Lf_WindowHeight = 0.30
+let g:Lf_CacheDirectory = expand('~/.vim/cache')
+let g:Lf_ShowRelativePath = 0
+let g:Lf_HideHelp = 1
+let g:Lf_StlColorscheme = 'powerline'
+let g:Lf_PreviewResult = {'Function':0, 'BufTag':0}
+let g:Lf_WildIgnore = {
+            \ 'dir': ['.svn','.git','.hg','.vscode','.wine','.deepinwine','.oh-my-zsh'],
+            \ 'file': ['*.sw?','~$*','*.bak','*.exe','*.o','*.so','*.py[co]']
+            \}
+let g:Lf_NormalMap = {
+	\ "File":   [["<ESC>", ':exec g:Lf_py "fileExplManager.quit()"<CR>']],
+	\ "Buffer": [["<ESC>", ':exec g:Lf_py "bufExplManager.quit()"<CR>']],
+	\ "Mru":    [["<ESC>", ':exec g:Lf_py "mruExplManager.quit()"<CR>']],
+	\ "Tag":    [["<ESC>", ':exec g:Lf_py "tagExplManager.quit()"<CR>']],
+	\ "Function":    [["<ESC>", ':exec g:Lf_py "functionExplManager.quit()"<CR>']],
+	\ "Colorscheme":    [["<ESC>", ':exec g:Lf_py "colorschemeExplManager.quit()"<CR>']],
+  \ }
 
 " ctrlp 
-let g:ctrlp_map = '<Leader>p'
-let g:ctrlp_cmd = 'CtrlP'
-nmap <Leader>f :CtrlPMRUFiles<CR>
-nmap <Leader>b :CtrlPBuffer<CR>
+"let g:ctrlp_cmd = 'CtrlP'
+"let g:ctrlp_custom_ignore = {
+"    \ 'dir':  '\v(\.git|\.hg|\.svn\|vendor|node_modules|tmp)$',
+"    \ 'file': '\v\.(exe|so|dll|zip|tar|tar.gz|pyc)$',
+"    \ }
+"let g:ctrlp_working_path_mode = 0
+"let g:ctrlp_match_window_bottom = 1
+"
+"let g:ctrlp_max_height = 15
+"let g:ctrlp_match_window_reversed = 0
+"let g:ctrlp_mruf_max = 500
+"let g:ctrlp_follow_symlinks = 1
+"
+"let g:ctrlp_by_filename = 1
+"let g:ctrlp_regexp = 0
+"let g:ctrlp_line_prefix = '鈾? '
 
-let g:ctrlp_custom_ignore = {
-    \ 'dir':  '\v(\.git|\.hg|\.svn\|vendor|node_modules|tmp)$',
-    \ 'file': '\v\.(exe|so|dll|zip|tar|tar.gz|pyc)$',
-    \ }
-let g:ctrlp_working_path_mode = 0
-let g:ctrlp_match_window_bottom = 1
-
-let g:ctrlp_max_height = 15
-let g:ctrlp_match_window_reversed = 0
-let g:ctrlp_mruf_max = 500
-let g:ctrlp_follow_symlinks = 1
-
-let g:ctrlp_by_filename = 1
-let g:ctrlp_regexp = 0
-let g:ctrlp_line_prefix = '♪ '
-
-nmap <silent>tt :NERDTreeToggle<CR>
-nmap <silent>tl :TlistToggle<CR>
+" DoxygenToolkit
+let g:DoxygenToolkit_briefTag_pre="\Brief  "
+let g:DoxygenToolkit_paramTag_pre="\Param "
+let g:DoxygenToolkit_returnTag="\Returns   "
+let g:DoxygenToolkit_authorName="vicky xiao"
+let g:DoxygenToolkit_licenseTag="GPL"
+let g:DoxygenToolkit_fileTag = "\\file "
+let g:DoxygenToolkit_dateTag = "\\date "
+let g:DoxygenToolkit_versionTag = "\\version "
+"let g:DoxygenToolkit_blockHeader="-----------------------------------------------"
+"let g:DoxygenToolkit_blockFooter="-----------------------------------------------"
+"let g:DoxygenToolkit_commentType = "C++"
+"let g:DoxygenToolkit_templateParamTag_pre = "\\tparam "
+"let g:DoxygenToolkit_blockTag = "\\name "
+"let g:DoxygenToolkit_classTag = "\\class "
 
 " SuperTab
 let g:SuperTabRetainCompletionType=2
 let g:SuperTabDefaultCompletionType="<C-X><C-O>"
 
-" let g:snippets_dir = '~/vimfiles/bundle/snipMate/snippets/'
+" ultisnips
+" Trigger configuration. Do not use <tab> if you use YCM.
+let g:UltiSnipsExpandTrigger="<c-t>"
+let g:UltiSnipsJumpForwardTrigger="<c-f>"
+let g:UltiSnipsJumpBackwardTrigger="<c-b>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+" UltiSnipsEdit! edit current filetype snips
 
 " emmet
 let g:user_emmet_mode='a'
 let g:user_emmet_install_global=0
+autocmd FileType html,css,xml,php,vue,wxss,wxml EmmetInstall
 let g:user_emmet_settings = {
 \ 'wxss': {
 \   'extends': 'css',
@@ -246,39 +316,267 @@ let g:user_emmet_settings = {
 "\     'label': [{'for': ''}],
 "\     'input': [{'type': 'text'}],
 "\     'form': [{'bindsubmit': ''}],
-autocmd FileType html,css,xml,php,vue,wxss,wxml EmmetInstall
 
+" AutoComplPop
+au FileType php setlocal dict+=~/.vim/bundle/AutoComplPop/php_funclist.txt
+" if !exists('g:AutoComplPop_Behavior')
+" let g:AutoComplPop_Behavior = {}
+" let g:AutoComplPop_Behavior['php'] = []
+" call add(g:AutoComplPop_Behavior['php'], {
+" \ 'command' :"\\",
+" \ 'pattern' : printf('−>∥::∥$\k\{%d,}$', 0),
+" \ 'repeat' : 0,
+" \})
+" endif
+
+" YouCompleteMe
+let g:ycm_global_ycm_extra_conf='~/.ycm_extra_conf.py'
+let g:ycm_confirm_extra_conf = 0
+let g:ycm_add_preview_to_completeopt = 0
+let g:ycm_show_diagnostics_ui = 0
+let g:ycm_server_log_level = 'info'
+let g:ycm_collect_identifiers_from_tags_files = 1
+let g:ycm_min_num_identifier_candidate_chars = 2
+let g:ycm_collect_identifiers_from_comments_and_strings = 1
+let g:ycm_complete_in_strings=1
+let g:ycm_key_invoke_completion = '<c-z>'
+" highlight PMenu ctermfg=0 ctermbg=242 guifg=black guibg=darkgrey
+" highlight PMenuSel ctermfg=242 ctermbg=8 guifg=darkgrey guibg=black
+set completeopt=menu,menuone
+noremap <c-z> <NOP>
+let g:ycm_semantic_triggers =  {
+            \ 'c,cpp,python,java,go,erlang,perl': ['re!\w{2}'],
+            \ 'cs,lua,javascript': ['re!\w{2}'],
+            \ }
+let g:ycm_filetype_whitelist = { 
+            \ "c":1,
+            \ "cpp":1, 
+            \ "objc":1,
+            \ "sh":1,
+            \ "zsh":1,
+            \ "zimbu":1,
+            \ }
+" nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
+
+" omnifunc set
 autocmd FileType python set omnifunc=pythoncomplete#Complete
-autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+"autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
 autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 autocmd FileType c set omnifunc=ccomplete#Complete
 
-au BufNewFile,BufRead *.html,*.js,*.vue,*.wxml,*.wxss set tabstop=2
-au BufNewFile,BufRead *.html,*.js,*.vue,*.wxml,*.wxss set softtabstop=2
-au BufNewFile,BufRead *.html,*.js,*.vue,*.wxml,*.wxss set shiftwidth=2
-au BufNewFile,BufRead *.html,*.js,*.vue,*.wxml,*.wxss set expandtab
-au BufNewFile,BufRead *.html,*.js,*.vue,*.wxml,*.wxss set autoindent
-au BufNewFile,BufRead *.html,*.js,*.vue,*.wxml,*.wxss set fileformat=unix
+" vim-vue
+autocmd FileType vue syntax sync fromstart
+au BufNewFile,BufRead *.html,*.js,*.vue,*.wxml,*.wxss,*.sql set tabstop=2
+au BufNewFile,BufRead *.html,*.js,*.vue,*.wxml,*.wxss,*.sql set softtabstop=2
+au BufNewFile,BufRead *.html,*.js,*.vue,*.wxml,*.wxss,*.sql set shiftwidth=2
+au BufNewFile,BufRead *.html,*.js,*.vue,*.wxml,*.wxss,*.sql set expandtab
+au BufNewFile,BufRead *.html,*.js,*.vue,*.wxml,*.wxss,*.sql set autoindent
+au BufNewFile,BufRead *.html,*.js,*.vue,*.wxml,*.wxss,*.sql set fileformat=unix
+
+" gutentags
+"let g:gutentags_project_root = ['.root', '.svn', '.git', '.project']
+"" 所生成的数据文件的名称 "
+"let g:gutentags_ctags_tagfile = '.tags'
+"" 将自动生成的 tags 文件全部放入 ~/.cache/tags 目录中，避免污染工程目录 "
+"let s:vim_tags = expand('~/.cache/tags')
+""let g:gutentags_exclude = ['*.css', '*.html', '*.js']
+"let g:gutentags_cache_dir = s:vim_tags
+"" 配置 ctags 的参数 "
+"let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
+"let g:gutentags_ctags_extra_args += ['--c++-kinds=+pxI']
+"let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
+"" 检测 ~/.cache/tags 不存在就新建 "
+"if !isdirectory(s:vim_tags)
+"   silent! call mkdir(s:vim_tags, 'p')
+"endif
+
+"set vimtex
+" TelegramTelegramlet g:vimtex_latexmk_options='-pdf -pdflatex="xelatex -synctex=1 \%S \%O" -verbose -file-line-error -interaction=nonstopmode'
+" let g:tex_flavor='latex'
+" let g:vimtex_view_method='skim'
+" let g:vimtex_quickfix_mode=0
+" set conceallevel=1
+" let g:tex_conceal='abdmg'
+
+nnoremap <F5> :call CompileRunGcc()<CR><CR>
+inoremap <F5> ESC :call CompileRunGcc()<CR><CR>
+func! CompileRunGcc()
+    exec"w"
+    if &filetype =='c'
+        exec"!g++ % -o %<"
+        exec"!time ./%<"
+    elseif &filetype =='cpp'
+        exec"!g++ % -o %<"
+        exec"!time ./%<"
+    elseif &filetype =='java'
+        exec"!javac %"
+        exec"!time java %<"
+    elseif &filetype =='sh'
+        :!time bash %
+    elseif &filetype =='python'
+        exec"!py %"
+    elseif &filetype =='html'
+        exec"!firefox % &"
+    elseif &filetype =='go'
+        exec"!go build %<"
+        exec"!time go run %"
+    elseif &filetype =='mkd'
+        exec"!~/.vim/markdown.pl % > %.html &"
+        exec"!firefox %.html &"
+    endif
+endfunc
 
 " syntastic
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
-let g:syntastic_javascript_checkers = ['eslint']
-"set statusline+=%#warningmsg#
-"set statusline+=%{SyntasticStatuslineFlag()}
-"set statusline+=%*
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 1
+" "let g:syntastic_check_on_open = 1
+" let g:syntastic_check_on_wq = 0
+" let g:syntastic_javascript_checkers = ['eslint']
+" "set statusline+=%#warningmsg#
+" "set statusline+=%{SyntasticStatuslineFlag()}
+" "set statusline+=%*
+
+" ale
+let g:ale_linters_explicit = 1
+let g:ale_completion_delay = 500
+let g:ale_echo_delay = 20
+let g:ale_lint_delay = 500
+let g:ale_echo_msg_format = '[%linter%] %code: %%s'
+let g:ale_lint_on_text_changed = 'normal'
+let g:ale_lint_on_insert_leave = 1
+let g:airline#extensions#ale#enabled = 1
+
+let g:ale_c_gcc_options = '-Wall -O2 -std=c99'
+let g:ale_cpp_gcc_options = '-Wall -O2 -std=c++14'
+let g:ale_c_cppcheck_options = ''
+let g:ale_cpp_cppcheck_options = ''
+
+let g:ale_php_phan_minimum_severity = get(g:, 'ale_php_phan_minimum_severity', 0)
+"let g:ale_php_phan_executable = './vendor/binphan'
+"let g:ale_linters = {'php': ['php', 'langserver', 'phan']}
+
+let g:ale_linter_aliases = {'vue': ['vue', 'javascript']}
+let g:ale_linters = {'vue': ['eslint', 'vls'], 'php': ['php', 'langserver', 'phan'] }
+
+" vimwiki
+"let g:vimwiki_use_mouse=1
+let g:vimwiki_list = [{'path': '~/.vimwiki/',
+\ 'path_html': '/home/wwwroot/wiki',
+\ 'template_path': '~/.vimwiki/template',
+\ 'template_default': 'default.tpl'},
+\{'path':'/root/wiki',
+\ 'path_html': '/home/wwwroot/wiki1'}]
+let g:vimwiki_valid_html_tags='b,i,s,u,sub,sup,kbd,br,hr,a'
+let g:vimwiki_use_calendar=1
+
+" Calendar
+"map <F8> :Calendar<cr>
+
+" Plantuml
+let g:plantuml_executable_script='java -jar ~/bin/plantuml.jar -o /home/wwwroot/wiki/uml/dstimg/artworks'
+
+" Asyncrun
+let g:asyncrun_open = 6
+let g:asyncrun_bell = 1
+
+" gutentags
+let g:gutentags_project_root = ['.root', '.svn', '.git', '.project']
+" 所生成的数据文件的名称 "
+let g:gutentags_ctags_tagfile = '.tags'
+" 将自动生成的 tags 文件全部放入 ~/.cache/tags 目录中，避免污染工程目录 "
+let s:vim_tags = expand('~/.cache/tags')
+"let g:gutentags_exclude = ['*.css', '*.html', '*.js']
+let g:gutentags_cache_dir = s:vim_tags
+" 配置 ctags 的参数 "
+let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
+"let g:gutentags_ctags_extra_args += ['--c++-kinds=+pxI']
+"let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
+let g:gutentags_ctags_extra_args += ['--php-kinds=+cfit']
+" 检测 ~/.cache/tags 不存在就新建 "
+if !isdirectory(s:vim_tags)
+   silent! call mkdir(s:vim_tags, 'p')
+endif
+
+" *** SHORTCUT ***
+" CtrlP
+"let g:ctrlp_map = '<Leader>p'
+"nmap <Leader>f :CtrlPMRUFiles<CR>
+"nmap <Leader>b :CtrlPBuffer<CR>
+
+set sessionoptions=buffers,sesdir,options,slash
+"function! MakeSession()
+"  let b:sessiondir = getcwd()
+"  let b:filename = b:sessiondir . '/Session.vim'
+"  exe "mksession! " . b:filename
+"  exe "edit! " . b:filename
+"  exe "g:^cd :d"
+"  exe "x" 
+"endfunction
+
+"function! MakeSession()
+"  let b:sessiondir = getcwd()
+"  let b:filename = b:sessiondir . '/_vimsession'
+"  exe "mksession! " . b:filename
+"  exe "edit! " . b:filename
+"  " Delete the line start with 'cd ...'
+"  exe "g:^cd :d"
+"  " Vim complains about b:sessiondir being undefined. So I use getcwd() directly
+"  " exe "%s:" . b:sessiondir . "::g". Use ':' to avoid path escape
+"  exe "%s:" . getcwd() . "/::g"
+"  " Save with 'x'
+"  exe "x"
+"endfunction
+
+" inoremap jj <esc>
+" nnoremap <F5> :w<CR> :make<CR>
+" inoremap <F5> <Esc>:w<CR>:silent make<CR>
+" vnoremap <F5> :<C-U>:w<CR>:silent make<CR>
+" nnoremap <silent><F5> :call CompileRunGcc()<CR><CR>
+nnoremap <F5> :call CompileRun()<CR>
+inoremap <F5> <Esc> :call CompileRun()<CR>
+
+nnoremap <silent> <F7> :AsyncRun -raw python %<CR>
+"nnoremap <silent> <F7> :call CompileRun()<CR>
+nnoremap <silent> <F9> :AsyncRun -raw source %<CR>
+nnoremap <silent> <F10> :call asyncrun#quickfix_toggle(6)<CR>
+ 
+func! CompileRun()
+    exec"w"
+    if &filetype =='c'
+        exec"!g++ % -o %<"
+        exec"!time ./%<"
+    elseif &filetype =='cpp'
+        exec"!g++ % -o %<"
+        exec"!time ./%<"
+    elseif &filetype =='java'
+        exec"!javac %"
+        exec"!time java %<"
+    elseif &filetype =='sh'
+        :!time bash %
+    elseif &filetype =='python'
+        exec"!time python %"
+    elseif &filetype =='html'
+        exec"!firefox % &"
+    elseif &filetype =='go'
+        exec"!go build %<"
+        exec"!time go run %"
+    elseif &filetype =='mkd'
+        exec"!~/.vim/markdown.pl % > %.html &"
+        exec"!firefox %.html &"
+    elseif &filetype =='plantuml'
+        exec"make %"
+    endif
+endfunc
+
+nmap <leader>cd :r!curl -s http://47.112.110.227:8082/xwtools/get.php<CR>
 
 "set connections for dbext
-let g:dbext_default_profile_mysql_cms= 'type=MYSQL:user=root:passwd=123:dbname=wcn_cmssite:extra=-t:host=111.101.169.49'
+let g:dbext_default_profile_mysql_vx = 'type=MYSQL:user=root:passwd=victory:dbname=vxframe:extra=-t'
 
-nmap <leader>cd :r!curl -s http://47.111.111.227:8082/xwtools/get.php<CR>
-
-source $VIM/myplugin/dict.vim
+source $VIM/myplugin1/dict.vim
 source $VIM/myplugin/phphelp.vim
 source $VIM/myplugin/putData.vim
-source $VIM/myplugin/qiushibaike.vim
+"source $VIM/myplugin/qiushibaike.vim
