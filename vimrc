@@ -16,11 +16,12 @@ Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'marsnut/nightpearl'
 Plugin 'marsnut/vim-utils'
+" Plugin 'lifepillar/vim-colortemplate'
 
-Plugin 'MiniBufExpl.vim'
+"Plugin 'MiniBufExpl.vim'
 Plugin 'The-NERD-tree'
 Plugin 'The-NERD-Commenter'
-Plugin 'kien/ctrlp.vim'
+"Plugin 'kien/ctrlp.vim'
 
 "Plugin 'Conque-Shell'
 Plugin 'dbext.vim'
@@ -30,25 +31,30 @@ Plugin 'vimwiki'
 "Plugin 'Vimpress'
 Plugin 'DoxygenToolkit.vim'
 
-Plugin 'taglist.vim'
+Plugin 'Yggdroot/LeaderF'
+"Plugin 'taglist.vim'
 "Plugin 'c.vim'
 Plugin 'Emmet.vim'
 Plugin 'Visual-Mark'
 
 Plugin 'L9'
-Plugin 'Syntastic'
+Plugin 'dense-analysis/ale'
+"Plugin 'Syntastic'
 "Plugin 'OmniCppComplete'
 Plugin 'AutoComplPop'
+Plugin 'ycm-core/YouCompleteMe'
 Plugin 'SuperTab'
-Plugin 'snipMate'
+"Plugin 'snipMate'
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
 
 Plugin 'joonty/vim-sauce'
-Plugin 'joonty/vim-phpqa'
+"Plugin 'joonty/vim-phpqa'
 "Plugin 'joonty/vim-taggatron'
 "Plugin 'EasyMotion'
 "Plugin 'beyondwords/vim-twig'
 
-Plugin 'phpvim'
+"Plugin 'phpvim'
 Plugin 'JavaScript-syntax'
 Plugin 'python.vim'
 Plugin 'itchyny/calendar.vim'
@@ -57,7 +63,12 @@ Plugin 'AD7six/vim-activity-log'
 "Plugin 'mhinz/vim-signify'
 Plugin 'fugitive.vim'
 Plugin 'posva/vim-vue'
-Plugin 'chemzqm/wxapp.vim'
+Plugin 'Rykka/colorv.vim'
+Plugin 'mattn/webapi-vim'
+Plugin 'lervag/vimtex'
+
+Plugin 'skywind3000/asyncrun.vim'
+Plugin 'ludovicchabant/vim-gutentags'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -65,6 +76,7 @@ filetype plugin indent on    " required
 "filetype plugin on
 
 " Brief help
+" source %
 " :PluginList       - lists configured plugins
 " :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
 " :PluginSearch foo - searches for foo; append `!` to refresh local cache
@@ -72,12 +84,10 @@ filetype plugin indent on    " required
 " ********** end setup for Vundle *****************
 
 " colorscheme desert
-colorscheme darkblue
-" colorscheme molokai
+" colorscheme darkblue
 " colorscheme vick
-" colorscheme lost-shrine
-" colorscheme nightpearl
-" set background=dark
+" colorscheme shrine
+colorscheme nightpearl
 
 highlight Pmenu  ctermbg=lightgrey ctermfg=black
 highlight PmenuSel  ctermbg=green ctermfg=black
@@ -156,41 +166,65 @@ endif
 let &guicursor = &guicursor . ",a:blinkon0"
 
 " MiniBufExpl
-let g:miniBufExplMapWindowNavVim = 1 
-let g:miniBufExplMapWindowNavArrows = 1 
-let g:miniBufExplMapCTabSwitchBufs = 1 
-let g:miniBufExplModSelTarget = 1 
-"let g:miniBufExplForceSyntaxEnable = 1  
-"let g:miniBufExplorerMoreThanOne = 2
+"let g:miniBufExplMapWindowNavVim = 1 
+"let g:miniBufExplMapWindowNavArrows = 1 
+"let g:miniBufExplMapCTabSwitchBufs = 1 
+"let g:miniBufExplModSelTarget = 1 
+""let g:miniBufExplForceSyntaxEnable = 1  
+""let g:miniBufExplorerMoreThanOne = 2
 
 " Taglist
-let Tlist_WinWidth=20
-let Tlist_Show_One_File=1
-let Tlist_Exit_OnlyWindow=1
-let Tlist_Use_Right_Window = 1
+"let Tlist_WinWidth=20
+"let Tlist_Show_One_File=1
+"let Tlist_Exit_OnlyWindow=1
+"let Tlist_Use_Right_Window = 1
 
 " The-NERD-tree
 let g:NERDTreeWinSize = 24
 let g:NERDTreeIgnore = ['\.pyc$']
 " let g:NERDTreeShowBookmarks=1
+nmap <silent><leader>tt :NERDTreeToggle<CR>
+"nmap <silent>tl :TlistToggle<CR>
+noremap <c-h> <c-w>h
+noremap <c-l> <c-w>l
+noremap <c-j> <c-w>j
+noremap <c-k> <c-w>k
+
+" LeaderF
+let g:Lf_ShortcutF = '<leader>ff'
+let g:Lf_ShortcutB = '<leader>bb'
+noremap <leader>fu :LeaderfFunction!<cr>
+noremap <leader>fm :LeaderfMru<cr>
+noremap <leader>ft :LeaderfTag<cr>
+noremap <leader>fl :LeaderfLine<cr>
+let g:Lf_StlSeparator = { 'left': '', 'right': '', 'font': '' }
+
+let g:Lf_RootMarkers = ['.project', '.root', '.svn', '.git']
+let g:Lf_WorkingDirectoryMode = 'Ac'
+let g:Lf_WindowHeight = 0.30
+let g:Lf_CacheDirectory = expand('~/.vim/cache')
+let g:Lf_ShowRelativePath = 0
+let g:Lf_HideHelp = 1
+let g:Lf_StlColorscheme = 'powerline'
+let g:Lf_PreviewResult = {'Function':0, 'BufTag':0}
 
 " ctrlp
-let g:ctrlp_cmd = 'CtrlP'
-let g:ctrlp_custom_ignore = {
-    \ 'dir':  '\v(\.git|\.hg|\.svn\|vendor|node_modules|tmp)$',
-    \ 'file': '\v\.(exe|so|dll|zip|tar|tar.gz|pyc)$',
-    \ }
-let g:ctrlp_working_path_mode = 0
-let g:ctrlp_match_window_bottom = 1
-
-let g:ctrlp_max_height = 15
-let g:ctrlp_match_window_reversed = 0
-let g:ctrlp_mruf_max = 500
-let g:ctrlp_follow_symlinks = 1
-
-let g:ctrlp_by_filename = 1
-let g:ctrlp_regexp = 0
-let g:ctrlp_line_prefix = '♪ '
+"let g:ctrlp_cmd = 'CtrlP'
+"let g:ctrlp_custom_ignore = {
+"    \ 'dir':  '\v(\.git|\.hg|\.svn\|vendor|node_modules|tmp)$',
+"    \ 'file': '\v\.(exe|so|dll|zip|tar|tar.gz|pyc)$',
+"    \ }
+"let g:ctrlp_working_path_mode = 0
+"let g:ctrlp_match_window_bottom = 1
+"
+"let g:ctrlp_max_height = 15
+"let g:ctrlp_match_window_reversed = 0
+"let g:ctrlp_mruf_max = 500
+"let g:ctrlp_follow_symlinks = 1
+"
+"let g:ctrlp_by_filename = 1
+"let g:ctrlp_regexp = 0
+"let g:ctrlp_line_prefix = '♪ '
 
 " DoxygenToolkit
 let g:DoxygenToolkit_briefTag_pre="\Brief  "
@@ -212,11 +246,20 @@ let g:DoxygenToolkit_versionTag = "\\version "
 let g:SuperTabRetainCompletionType=2
 let g:SuperTabDefaultCompletionType="<C-X><C-O>"
 
-"let g:snippets_dir = '~/vimfiles/bundle/snipMate/snippets/'
+" ultisnips
+" Trigger configuration. Do not use <tab> if you use YCM.
+let g:UltiSnipsExpandTrigger="<c-t>"
+let g:UltiSnipsJumpForwardTrigger="<c-f>"
+let g:UltiSnipsJumpBackwardTrigger="<c-b>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+" UltiSnipsEdit! edit current filetype snips
 
 " Emmet
 let g:user_emmet_mode='a'
 let g:user_emmet_install_global=0
+autocmd FileType html,css,xml,php,vue,wxss,wxml EmmetInstall
 let g:user_emmet_settings = {
 \ 'wxss': {
 \   'extends': 'css',
@@ -253,35 +296,95 @@ let g:user_emmet_settings = {
 "\     'label': [{'for': ''}],
 "\     'input': [{'type': 'text'}],
 "\     'form': [{'bindsubmit': ''}],
-autocmd FileType html,css,xml,php,vue,wxss,wxml EmmetInstall
+
+" AutoComplPop
+au FileType php setlocal dict+=~/.vim/bundle/AutoComplPop/php_funclist.txt
+" if !exists('g:AutoComplPop_Behavior')
+" let g:AutoComplPop_Behavior = {}
+" let g:AutoComplPop_Behavior['php'] = []
+" call add(g:AutoComplPop_Behavior['php'], {
+" \ 'command' :"\\",
+" \ 'pattern' : printf('−>∥::∥$\k\{%d,}$', 0),
+" \ 'repeat' : 0,
+" \})
+" endif
+
+" YouCompleteMe
+let g:ycm_add_preview_to_completeopt = 0
+let g:ycm_show_diagnostics_ui = 0
+let g:ycm_server_log_level = 'info'
+let g:ycm_min_num_identifier_candidate_chars = 2
+let g:ycm_collect_identifiers_from_tags_files = 1
+let g:ycm_collect_identifiers_from_comments_and_strings = 1
+let g:ycm_complete_in_strings=1
+let g:ycm_key_invoke_completion = '<c-z>'
+" highlight PMenu ctermfg=0 ctermbg=242 guifg=black guibg=darkgrey
+" highlight PMenuSel ctermfg=242 ctermbg=8 guifg=darkgrey guibg=black
+set completeopt=menu,menuone
+noremap <c-z> <NOP>
+let g:ycm_semantic_triggers =  {
+            \ 'c,cpp,python,java,go,erlang,perl': ['re!\w{2}'],
+            \ 'cs,lua,javascript': ['re!\w{2}'],
+            \ }
+let g:ycm_filetype_whitelist = { 
+            \ "c":1,
+            \ "cpp":1, 
+            \ "objc":1,
+            \ "sh":1,
+            \ "zsh":1,
+            \ "zimbu":1,
+            \ }
+let g:ycm_global_ycm_extra_conf='~/.ycm_extra_conf.py'
+let g:ycm_confirm_extra_conf = 0
 
 " omnifunc set
 autocmd FileType python set omnifunc=pythoncomplete#Complete
-autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+" autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
-autocmd FileType php set omnifunc=phpcomplete#CompletePHP
+" autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 autocmd FileType c set omnifunc=ccomplete#Complete
 
 " vim-vue
 autocmd FileType vue syntax sync fromstart
-au BufNewFile,BufRead *.html,*.js,*.vue,*.wxml,*.wxss set tabstop=2
-au BufNewFile,BufRead *.html,*.js,*.vue,*.wxml,*.wxss set softtabstop=2
-au BufNewFile,BufRead *.html,*.js,*.vue,*.wxml,*.wxss set shiftwidth=2
-au BufNewFile,BufRead *.html,*.js,*.vue,*.wxml,*.wxss set expandtab
-au BufNewFile,BufRead *.html,*.js,*.vue,*.wxml,*.wxss set autoindent
-au BufNewFile,BufRead *.html,*.js,*.vue,*.wxml,*.wxss set fileformat=unix
+au BufNewFile,BufRead *.html,*.js,*.vue,*.wxml,*.wxss,*.sql set tabstop=2
+au BufNewFile,BufRead *.html,*.js,*.vue,*.wxml,*.wxss,*.sql set softtabstop=2
+au BufNewFile,BufRead *.html,*.js,*.vue,*.wxml,*.wxss,*.sql set shiftwidth=2
+au BufNewFile,BufRead *.html,*.js,*.vue,*.wxml,*.wxss,*.sql set expandtab
+au BufNewFile,BufRead *.html,*.js,*.vue,*.wxml,*.wxss,*.sql set autoindent
+au BufNewFile,BufRead *.html,*.js,*.vue,*.wxml,*.wxss,*.sql set fileformat=unix
 
 " syntastic
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-"let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_javascript_checkers = ['eslint']
-"set statusline+=%#warningmsg#
-"set statusline+=%{SyntasticStatuslineFlag()}
-"set statusline+=%*
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 1
+" "let g:syntastic_check_on_open = 1
+" let g:syntastic_check_on_wq = 0
+" let g:syntastic_javascript_checkers = ['eslint']
+" "set statusline+=%#warningmsg#
+" "set statusline+=%{SyntasticStatuslineFlag()}
+" "set statusline+=%*
+
+let g:ale_linters_explicit = 1
+let g:ale_completion_delay = 500
+let g:ale_echo_delay = 20
+let g:ale_lint_delay = 500
+let g:ale_echo_msg_format = '[%linter%] %code: %%s'
+let g:ale_lint_on_text_changed = 'normal'
+let g:ale_lint_on_insert_leave = 1
+let g:airline#extensions#ale#enabled = 1
+
+let g:ale_c_gcc_options = '-Wall -O2 -std=c99'
+let g:ale_cpp_gcc_options = '-Wall -O2 -std=c++14'
+let g:ale_c_cppcheck_options = ''
+let g:ale_cpp_cppcheck_options = ''
+
+let g:ale_php_phan_minimum_severity = get(g:, 'ale_php_phan_minimum_severity', 0)
+"let g:ale_php_phan_executable = './vendor/binphan'
+"let g:ale_linters = {'php': ['php', 'langserver', 'phan']}
+
+let g:ale_linter_aliases = {'vue': ['vue', 'javascript']}
+let g:ale_linters = {'vue': ['eslint', 'vls'], 'php': ['php', 'langserver', 'phan'] }
 
 " vimwiki
 "let g:vimwiki_use_mouse=1
@@ -298,28 +401,92 @@ let g:vimwiki_use_calendar=1
 " Calendar
 "map <F8> :Calendar<cr>
 
-" dbext
-let g:dbext_default_profile_mysql_laracms = 'type=MYSQL:user=root:passwd=123:dbname=laracms:extra=-t'
+" Plantuml
+let g:plantuml_executable_script='java -jar ~/bin/plantuml.jar -o /home/wwwroot/wiki/uml/dstimg/dute'
 
-let g:plantuml_executable_script='java -jar ~/bin/plantuml.jar -o /home/wwwroot/wiki/uml/dstimg/ctcm'
+" Asyncrun
+let g:asyncrun_open = 6
+let g:asyncrun_bell = 1
+
+" gutentags
+let g:gutentags_project_root = ['.root', '.svn', '.git', '.project']
+" 所生成的数据文件的名称 "
+let g:gutentags_ctags_tagfile = '.tags'
+" 将自动生成的 tags 文件全部放入 ~/.cache/tags 目录中，避免污染工程目录 "
+let s:vim_tags = expand('~/.cache/tags')
+"let g:gutentags_exclude = ['*.css', '*.html', '*.js']
+let g:gutentags_cache_dir = s:vim_tags
+" 配置 ctags 的参数 "
+let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
+"let g:gutentags_ctags_extra_args += ['--c++-kinds=+pxI']
+"let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
+let g:gutentags_ctags_extra_args += ['--php-kinds=+cfit']
+" 检测 ~/.cache/tags 不存在就新建 "
+if !isdirectory(s:vim_tags)
+   silent! call mkdir(s:vim_tags, 'p')
+endif
 
 " *** SHORTCUT ***
-" CtrlD
-let g:ctrlp_map = '<Leader>p'
-nmap <Leader>f :CtrlPMRUFiles<CR>
-nmap <Leader>b :CtrlPBuffer<CR>
+" CtrlP
+"let g:ctrlp_map = '<Leader>p'
+"nmap <Leader>f :CtrlPMRUFiles<CR>
+"nmap <Leader>b :CtrlPBuffer<CR>
 
-" The-NERD-tree
-nmap <silent><leader>tt :NERDTreeToggle<CR>
-"nmap <silent><F4> :NERDTreeToggle<CR>
-nmap <silent>tl :TlistToggle<CR>
+set sessionoptions=buffers,sesdir,unix
+"function! MakeSession()
+"  let b:sessiondir = getcwd()
+"  let b:filename = b:sessiondir . '/Session.vim'
+"  exe "mksession! " . b:filename
+"  exe "edit! " . b:filename
+"  exe "g:^cd :d"
+"  exe "x" 
+"endfunction
 
-nnoremap <F5> :w<CR> :make<CR>
-inoremap <F5> <Esc>:w<CR>:silent make<CR>
-vnoremap <F5> :<C-U>:w<CR>:silent make<CR
 inoremap jj <esc>
+" nnoremap <F5> :w<CR> :make<CR>
+" inoremap <F5> <Esc>:w<CR>:silent make<CR>
+" vnoremap <F5> :<C-U>:w<CR>:silent make<CR>
+" nnoremap <silent><F5> :call CompileRunGcc()<CR><CR>
+nnoremap <F5> :call CompileRun()<CR>
+inoremap <F5> <Esc> :call CompileRun()<CR>
+
+nnoremap <silent> <F7> :AsyncRun -raw python3 %<CR>
+"nnoremap <silent> <F7> :call CompileRun()<CR>
+nnoremap <silent> <F9> :AsyncRun -raw source %<CR>
+nnoremap <silent> <F10> :call asyncrun#quickfix_toggle(6)<CR>
+ 
+func! CompileRun()
+    exec"w"
+    if &filetype =='c'
+        exec"!g++ % -o %<"
+        exec"!time ./%<"
+    elseif &filetype =='cpp'
+        exec"!g++ % -o %<"
+        exec"!time ./%<"
+    elseif &filetype =='java'
+        exec"!javac %"
+        exec"!time java %<"
+    elseif &filetype =='sh'
+        :!time bash %
+    elseif &filetype =='python'
+        exec"AsyncRun -raw python3 %"
+    elseif &filetype =='html'
+        exec"!firefox % &"
+    elseif &filetype =='go'
+        exec"AsyncRun -raw go build %<"
+        exec"AsyncRun -raw go run %"
+    elseif &filetype =='mkd'
+        exec"!~/.vim/markdown.pl % > %.html &"
+        exec"!firefox %.html &"
+    elseif &filetype =='plantuml'
+        exec"make %"
+    endif
+endfunc
 
 nmap <leader>cd :r!curl -s http://47.112.110.227:8082/xwtools/get.php<CR>
 
+let g:dbext_default_profile_mysql_artBD = 'type=MYSQL:user=root:passwd=victory:dbname=artBD:extra=-t'
+
 source ~/.vim/myplugin/dict.vim
+source ~/.vim/myplugin/phphelp.vim
 source ~/.vim/myplugin/putData.vim
