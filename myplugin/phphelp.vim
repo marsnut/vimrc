@@ -3,7 +3,7 @@ if exists('g:loaded_vxPhpHelp')
 endif
 let g:loaded_vxPhpHelp = 1
 
-if !has('python') 
+if !has('python3') 
     echo 'Error: required vim compile with python'
     finish
 endif
@@ -23,98 +23,102 @@ function! s:SetBuffer()
 endfunction
 
 
-function! s:vxPhpHelp(funcName)
+function! s:vxPhpHelp(fname)
     call s:SetBuffer()
 
-python << EOF
+python3 << EOF
+
+import vim
+from lxml import etree
+import requests
+
+
+def setContent(content):
+    arr = content.split('\n')
+    isBlank=True
+    item=''
+
+    vim.current.buffer.append('\n')
+
+    for line in arr:
+        if len(line.strip()) > 0:
+            item += line.strip()
+            if isBlank:
+                vim.current.buffer.append(item)
+                item = ''
+                isBlank = False
+        else:
+            isBlank = True;
+
+    vim.current.buffer.append(item)
+
+
+vim.current.buffer[:] = None
 
 PHP_URL = "http://www.php.net/manual/zh/function.%s.php"
 
-import vim
-import re
-import urllib2
-from sgmllib import SGMLParser
+fname = vim.eval('a:fname').replace("_", "-")
+url = PHP_URL % (fname)
 
-class phpHelp(SGMLParser):
-    def __init__(self):
-        SGMLParser.__init__(self)
-        self.text = ''
-        self.is_refentry = 0
-        
-    def addLine(self):
-        vim.current.buffer.append(self.text)
-        self.text = ''
+html = requests.get(url).content.decode('utf-8')
+dom_tree = etree.HTML(html)
 
-    def start_div(self, attrs):
-        for attr in attrs:
-            if attr[0] == "class" and attr[1] == "refentry":
-                self.is_refentry = 1
-                
-    def end_div(self):
-        if self.is_refentry == 1:
-            self.addLine()
+refentry  = dom_tree.xpath("//div[@class='refentry']")[0]
 
-    def start_section(self, attrs):
-        for attr in attrs:
-            if attr[0] == "id" and attr[1] == "usernotes":
-                self.is_refentry = 0
-                
-    def end_section(self):
-        if self.is_refentry == 1:
-            self.addLine()
+refdiv = refentry.xpath("div[@class='refnamediv']")[0]
+text = refdiv.xpath('string(.)')
+setContent(text)
 
-    def unknown_starttag(self,tag,attrs):
-        if self.is_refentry and (tag == "br" or tag == "dd"):
-            self.addLine()
+refdiv = refentry.xpath("div[@class='refsect1 description']")[0]
+text = refdiv.xpath('string()')
+setContent(text)
 
-    def unknown_endtag(self,tag):
-        if self.is_refentry:
-            if tag in ["h1", "h2", "h3", "h4", "h5", "br", "p", "li", "tr", "dt"]:
-                self.addLine()
-            elif tag == "td":
-                self.text += " "
+refdiv = refentry.xpath("div[@class='refsect1 parameters']")[0]
+text = refdiv.xpath('string()')
+setContent(text)
 
-    def handle_data(self, text):
-        if self.is_refentry == 1:
-            #erase \n and space char
-            self.text += re.sub("\s*\n\s*", " ", text)
+refdiv = refentry.xpath("div[@class='refsect1 returnvalues']")[0]
+text = refdiv.xpath('string()')
+setContent(text)
 
-    #def handle_charref(self, text):
-    def handle_entityref(self, text):
-        if self.is_refentry == 1:
-            if text == 'nbsp':
-                self.text += ' '
-            elif text == 'gt':
-                self.text += '>'
-            elif text == 'lt':
-                self.text += '<'
-            elif text == 'ndash':
-                self.text += '-'
-            elif text == 'mdash':
-                self.text += '--'
-            elif text == ' quot':
-                self.text += '"'
-            elif text == 'amp':
-                self.text += '&'
+refdiv = refentry.xpath("div[@class='refsect1 examples']")[0]
+title = refdiv.xpath('h3/text()')[0]
+vim.current.buffer.append('\n')
+vim.current.buffer.append(title)
+vim.current.buffer.append('-------------')
 
-    def help(self, funcName):
-        url = PHP_URL % funcName.replace('_', '-')
-        #url = "http://127.0.0.1/mytest.htm"
-        try:
-            content = urllib2.urlopen(url).read()
-        except Exception, e:
-            vim.current.buffer.append(e)
-            return
+ref = refdiv.xpath("//div[@class='example']")
+for line in ref:
+    title = line.xpath('p')[0].xpath('string()')
 
-        self.feed(content)
-        
-vim.current.buffer[:] = None
-phpHelp().help(vim.eval('a:funcName'))
+    vim.current.buffer.append('\n')
+    vim.current.buffer.append('  ' + title)
+
+    vim.current.buffer.append('  ***********')
+
+    codes = line.xpath('div/div/code/span/span')
+    item='  '
+    for code in codes:
+        #br = etree.SubElement(code, 'br')
+        #br.tail = '\n'
+        text = code.xpath('string()')
+        item += text
+        if str(etree.tostring(code),encoding='utf-8').find('<br/>') > 0:
+            vim.current.buffer.append(item)
+            item = '  '
+
+    vim.current.buffer.append(item)
+
+refdiv = refentry.xpath("div[@class='refsect1 notes']")[0]
+text = refdiv.xpath('string(.)')
+setContent(text)
+
+refdiv = refentry.xpath("div[@class='refsect1 seealso']")[0]
+text = refdiv.xpath('string(.)')
+setContent(text)
 
 EOF
 
 endfunction
 
 command! -nargs=1 Php :call s:vxPhpHelp(<f-args>)
-
-
