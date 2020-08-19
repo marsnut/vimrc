@@ -53,14 +53,13 @@ Plugin 'marsnut/nightpearl'
 Plugin 'molokai'
 Plugin 'Zenburn'
 
-"Plugin 'MiniBufExpl.vim'
+Plugin 'MiniBufExpl.vim'
 Plugin 'The-NERD-tree'
 Plugin 'The-NERD-Commenter'
 "Plugin 'FuzzyFinder'
 "Plugin 'wincent/command-t'
 
 Plugin 'Yggdroot/LeaderF'
-"Plugin 'kien/ctrlp.vim'
 Plugin 'dbext.vim'
 
 Plugin 'Markdown'
@@ -174,12 +173,12 @@ if has('mouse')
 endif
 
 " MiniBufExpl
-"let g:miniBufExplMapWindowNavVim = 1 
-"let g:miniBufExplMapWindowNavArrows = 1 
-"let g:miniBufExplMapCTabSwitchBufs = 1 
-"let g:miniBufExplModSelTarget = 1 
-""let g:miniBufExplForceSyntaxEnable = 1  
-""let g:miniBufExplorerMoreThanOne = 2
+let g:miniBufExplMapWindowNavVim = 1 
+let g:miniBufExplMapWindowNavArrows = 1 
+let g:miniBufExplMapCTabSwitchBufs = 1 
+let g:miniBufExplModSelTarget = 1 
+"let g:miniBufExplForceSyntaxEnable = 1  
+"let g:miniBufExplorerMoreThanOne = 2
 
 " TagList
 "let Tlist_WinWidth=20
@@ -199,9 +198,9 @@ noremap <c-j> <c-w>j
 noremap <c-k> <c-w>k
 
 " LeaderF
-let g:Lf_ShortcutF = '<leader>ff'
+let g:Lf_ShortcutF = '<leader>fi'
 let g:Lf_ShortcutB = '<leader>bb'
-noremap <leader>fu :LeaderfFunction!<cr>
+noremap <leader>ff :LeaderfFunction!<cr>
 noremap <leader>fm :LeaderfMru<cr>
 noremap <leader>ft :LeaderfTag<cr>
 noremap <leader>fl :LeaderfLine<cr>
@@ -216,7 +215,7 @@ let g:Lf_HideHelp = 1
 let g:Lf_StlColorscheme = 'powerline'
 let g:Lf_PreviewResult = {'Function':0, 'BufTag':0}
 let g:Lf_WildIgnore = {
-            \ 'dir': ['.svn','.git','.hg','.vscode','.wine','.deepinwine','.oh-my-zsh'],
+            \ 'dir': ['.svn','.git','.hg','.vimses','.vscode','.wine','.deepinwine','.oh-my-zsh'],
             \ 'file': ['*.sw?','~$*','*.bak','*.exe','*.o','*.so','*.py[co]']
             \}
 let g:Lf_NormalMap = {
@@ -227,24 +226,6 @@ let g:Lf_NormalMap = {
 	\ "Function":    [["<ESC>", ':exec g:Lf_py "functionExplManager.quit()"<CR>']],
 	\ "Colorscheme":    [["<ESC>", ':exec g:Lf_py "colorschemeExplManager.quit()"<CR>']],
   \ }
-
-" ctrlp 
-"let g:ctrlp_cmd = 'CtrlP'
-"let g:ctrlp_custom_ignore = {
-"    \ 'dir':  '\v(\.git|\.hg|\.svn\|vendor|node_modules|tmp)$',
-"    \ 'file': '\v\.(exe|so|dll|zip|tar|tar.gz|pyc)$',
-"    \ }
-"let g:ctrlp_working_path_mode = 0
-"let g:ctrlp_match_window_bottom = 1
-"
-"let g:ctrlp_max_height = 15
-"let g:ctrlp_match_window_reversed = 0
-"let g:ctrlp_mruf_max = 500
-"let g:ctrlp_follow_symlinks = 1
-"
-"let g:ctrlp_by_filename = 1
-"let g:ctrlp_regexp = 0
-"let g:ctrlp_line_prefix = '鈾? '
 
 " DoxygenToolkit
 let g:DoxygenToolkit_briefTag_pre="\Brief  "
@@ -501,12 +482,9 @@ if !isdirectory(s:vim_tags)
 endif
 
 " *** SHORTCUT ***
-" CtrlP
-"let g:ctrlp_map = '<Leader>p'
-"nmap <Leader>f :CtrlPMRUFiles<CR>
-"nmap <Leader>b :CtrlPBuffer<CR>
 
-set sessionoptions=buffers,sesdir,options,slash
+"set sessionoptions=buffers,sesdir,options,slash
+set sessionoptions=buffers,sesdir,slash
 "function! MakeSession()
 "  let b:sessiondir = getcwd()
 "  let b:filename = b:sessiondir . '/Session.vim'
