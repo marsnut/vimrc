@@ -18,10 +18,9 @@ Plugin 'marsnut/nightpearl'
 Plugin 'marsnut/vim-utils'
 " Plugin 'lifepillar/vim-colortemplate'
 
-"Plugin 'MiniBufExpl.vim'
+Plugin 'MiniBufExpl.vim'
 Plugin 'The-NERD-tree'
 Plugin 'The-NERD-Commenter'
-"Plugin 'kien/ctrlp.vim'
 
 "Plugin 'Conque-Shell'
 Plugin 'dbext.vim'
@@ -91,6 +90,8 @@ colorscheme nightpearl
 
 highlight Pmenu  ctermbg=lightgrey ctermfg=black
 highlight PmenuSel  ctermbg=green ctermfg=black
+" :hi SignColor ctermfg=red ctermbg=blue guifg=white guibg=RoyalBlue3
+" highlight SignColor ctermfg=white ctermbg=blue guifg=white guibg=RoyalBlue3
 
 if v:lang =~ "utf8$" || v:lang =~ "UTF-8$"
    set fileencodings=ucs-bom,utf-8,latin1
@@ -166,12 +167,12 @@ endif
 let &guicursor = &guicursor . ",a:blinkon0"
 
 " MiniBufExpl
-"let g:miniBufExplMapWindowNavVim = 1 
-"let g:miniBufExplMapWindowNavArrows = 1 
-"let g:miniBufExplMapCTabSwitchBufs = 1 
-"let g:miniBufExplModSelTarget = 1 
-""let g:miniBufExplForceSyntaxEnable = 1  
-""let g:miniBufExplorerMoreThanOne = 2
+let g:miniBufExplMapWindowNavVim = 1 
+let g:miniBufExplMapWindowNavArrows = 1 
+let g:miniBufExplMapCTabSwitchBufs = 1 
+let g:miniBufExplModSelTarget = 1 
+"let g:miniBufExplForceSyntaxEnable = 1  
+"let g:miniBufExplorerMoreThanOne = 2
 
 " Taglist
 "let Tlist_WinWidth=20
@@ -191,9 +192,9 @@ noremap <c-j> <c-w>j
 noremap <c-k> <c-w>k
 
 " LeaderF
-let g:Lf_ShortcutF = '<leader>ff'
+let g:Lf_ShortcutF = '<leader>fi'
 let g:Lf_ShortcutB = '<leader>bb'
-noremap <leader>fu :LeaderfFunction!<cr>
+noremap <leader>ff :LeaderfFunction!<cr>
 noremap <leader>fm :LeaderfMru<cr>
 noremap <leader>ft :LeaderfTag<cr>
 noremap <leader>fl :LeaderfLine<cr>
@@ -219,23 +220,6 @@ let g:Lf_NormalMap = {
 	\ "Function":    [["<ESC>", ':exec g:Lf_py "functionExplManager.quit()"<CR>']],
 	\ "Colorscheme":    [["<ESC>", ':exec g:Lf_py "colorschemeExplManager.quit()"<CR>']],
   \ }
-" ctrlp
-"let g:ctrlp_cmd = 'CtrlP'
-"let g:ctrlp_custom_ignore = {
-"    \ 'dir':  '\v(\.git|\.hg|\.svn\|vendor|node_modules|tmp)$',
-"    \ 'file': '\v\.(exe|so|dll|zip|tar|tar.gz|pyc)$',
-"    \ }
-"let g:ctrlp_working_path_mode = 0
-"let g:ctrlp_match_window_bottom = 1
-"
-"let g:ctrlp_max_height = 15
-"let g:ctrlp_match_window_reversed = 0
-"let g:ctrlp_mruf_max = 500
-"let g:ctrlp_follow_symlinks = 1
-"
-"let g:ctrlp_by_filename = 1
-"let g:ctrlp_regexp = 0
-"let g:ctrlp_line_prefix = '♪ '
 
 " DoxygenToolkit
 let g:DoxygenToolkit_briefTag_pre="\Brief  "
@@ -438,11 +422,6 @@ if !isdirectory(s:vim_tags)
 endif
 
 " *** SHORTCUT ***
-" CtrlP
-"let g:ctrlp_map = '<Leader>p'
-"nmap <Leader>f :CtrlPMRUFiles<CR>
-"nmap <Leader>b :CtrlPBuffer<CR>
-
 set sessionoptions=buffers,sesdir,unix
 "function! MakeSession()
 "  let b:sessiondir = getcwd()
@@ -494,7 +473,7 @@ func! CompileRun()
     endif
 endfunc
 
-nmap <leader>cd :r!curl -s http://47.112.110.227:8082/xwtools/get.php<CR>
+nmap <leader>cd :r!curl -s http://47.112.119.228:8082/xwtools/get.php<CR>
 
 let g:dbext_default_profile_mysql_artBD = 'type=MYSQL:user=root:passwd=victory:dbname=artBD:extra=-t'
 
