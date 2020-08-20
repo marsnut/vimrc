@@ -18,7 +18,7 @@ Plugin 'marsnut/nightpearl'
 Plugin 'marsnut/vim-utils'
 " Plugin 'lifepillar/vim-colortemplate'
 
-Plugin 'MiniBufExpl.vim'
+"Plugin 'MiniBufExpl.vim'
 Plugin 'The-NERD-tree'
 Plugin 'The-NERD-Commenter'
 
@@ -166,20 +166,6 @@ endif
 " http://www.linuxpowertop.org/known.php
 let &guicursor = &guicursor . ",a:blinkon0"
 
-" MiniBufExpl
-let g:miniBufExplMapWindowNavVim = 1 
-let g:miniBufExplMapWindowNavArrows = 1 
-let g:miniBufExplMapCTabSwitchBufs = 1 
-let g:miniBufExplModSelTarget = 1 
-"let g:miniBufExplForceSyntaxEnable = 1  
-"let g:miniBufExplorerMoreThanOne = 2
-
-" Taglist
-"let Tlist_WinWidth=20
-"let Tlist_Show_One_File=1
-"let Tlist_Exit_OnlyWindow=1
-"let Tlist_Use_Right_Window = 1
-
 " The-NERD-tree
 let g:NERDTreeWinSize = 24
 let g:NERDTreeIgnore = ['\.pyc$']
@@ -202,11 +188,15 @@ let g:Lf_StlSeparator = { 'left': '', 'right': '', 'font': '' }
 
 let g:Lf_RootMarkers = ['.project', '.root', '.svn', '.git']
 let g:Lf_WorkingDirectoryMode = 'Ac'
+let g:Lf_WindowPosition = 'popup'
+let g:Lf_PopupWidth = 0.80
+let g:Lf_PopupHeight = 0.80
 let g:Lf_WindowHeight = 0.30
 let g:Lf_CacheDirectory = expand('~/.vim/cache')
 let g:Lf_ShowRelativePath = 0
 let g:Lf_HideHelp = 1
 let g:Lf_StlColorscheme = 'powerline'
+"let g:Lf_PopupColorscheme = 'gruvbox_default'
 let g:Lf_PreviewResult = {'Function':0, 'BufTag':0}
 let g:Lf_WildIgnore = {
             \ 'dir': ['.svn','.git','.hg','.vscode','.wine','.deepinwine','.oh-my-zsh'],
