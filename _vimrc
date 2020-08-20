@@ -53,7 +53,7 @@ Plugin 'marsnut/nightpearl'
 Plugin 'molokai'
 Plugin 'Zenburn'
 
-Plugin 'MiniBufExpl.vim'
+"Plugin 'MiniBufExpl.vim'
 Plugin 'The-NERD-tree'
 Plugin 'The-NERD-Commenter'
 "Plugin 'FuzzyFinder'
@@ -171,20 +171,6 @@ inoremap <C-U> <C-G>u<C-U>
 if has('mouse')
   set mouse=a
 endif
-
-" MiniBufExpl
-let g:miniBufExplMapWindowNavVim = 1 
-let g:miniBufExplMapWindowNavArrows = 1 
-let g:miniBufExplMapCTabSwitchBufs = 1 
-let g:miniBufExplModSelTarget = 1 
-"let g:miniBufExplForceSyntaxEnable = 1  
-"let g:miniBufExplorerMoreThanOne = 2
-
-" TagList
-"let Tlist_WinWidth=20
-"let Tlist_Show_One_File=1
-"let Tlist_Exit_OnlyWindow=1
-"let Tlist_Use_Right_Window = 1
 
 " The-NERD-tree
 let g:NERDTreeWinSize = 20
