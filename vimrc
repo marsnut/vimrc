@@ -467,6 +467,7 @@ nmap <leader>cd :r!curl -s http://47.112.119.228:8082/xwtools/get.php<CR>
 
 let g:dbext_default_profile_mysql_artBD = 'type=MYSQL:user=root:passwd=victory:dbname=artBD:extra=-t'
 
+
 source ~/.vim/myplugin/dict.vim
 source ~/.vim/myplugin/phphelp.vim
 source ~/.vim/myplugin/putData.vim
