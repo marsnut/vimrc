@@ -3,6 +3,7 @@ if !has('python3')
     finish
 endif
 
+
 function! VXDict(word)
 python3 << EOF
 
